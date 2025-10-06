@@ -156,8 +156,9 @@ void deleteNodeAtPosition(Node **head, int position)
         current = current->next;
         index++;
     }
-    current->next = current->next->next;
-    free(current->next);
+    Node *temp = current->next;
+    current->next = temp->next;
+    free(temp);
 }
 
 void sortNode(Node **head)
@@ -170,7 +171,7 @@ void sortNode(Node **head)
         Node *minNode = i;
         for (Node *j = i->next; j != NULL; j = j->next)
         {
-            if (minNode->data > j->data)
+            if (j->data < minNode->data)
             {
                 minNode = j;
             }
@@ -245,6 +246,7 @@ int main()
         case 9:
             printf("Sort list nodes \n");
             sortNode(&head);
+            break;
         case 0:
             printf("Exiting...\n");
             break;
